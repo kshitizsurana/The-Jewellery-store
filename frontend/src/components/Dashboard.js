@@ -11,27 +11,40 @@ const Dashboard = ({ user, token, onLogout }) => {
   useEffect(() => {
     const fetchJewelryData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/jewelry`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        console.log('Fetching jewelry data from:', `${API_URL}/jewelry`);
+        // Use public endpoint (no auth required)
+        const response = await axios.get(`${API_URL}/jewelry`);
+        console.log('Jewelry response:', response.data);
         if (response.data.success) {
-          setJewelryData(response.data.jewelry);
+          setJewelryData(response.data.jewelry || []);
+        } else {
+          console.log('No jewelry data or unsuccessful response');
+          setJewelryData([]);
         }
       } catch (error) {
         console.error('Error fetching jewelry data:', error);
+        console.error('Error details:', {
+          status: error.response?.status,
+          statusText: error.response?.statusText,
+          data: error.response?.data
+        });
+        // Set empty array on error
+        setJewelryData([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchJewelryData();
-  }, [token, API_URL]);
+  }, [API_URL]); // Removed token dependency since we're using public endpoint
 
   const formatPrice = (price) => {
+    // Handle both string/decimal and number types from database
+    const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
-    }).format(price);
+    }).format(numericPrice || 0);
   };
 
   return (
@@ -136,8 +149,15 @@ const Dashboard = ({ user, token, onLogout }) => {
                   </div>
                 ) : (
                   <div className="empty-state">
-                    <span className="empty-icon">JEWELRY</span>
-                    <p>Our collection is being curated. Check back soon for exclusive pieces!</p>
+                    <span className="empty-icon">💎</span>
+                    <h3>Collection Loading</h3>
+                    <p>Our exclusive jewelry collection is being prepared. Please check your connection or try again.</p>
+                    <button 
+                      className="retry-button"
+                      onClick={() => window.location.reload()}
+                    >
+                      Refresh Page
+                    </button>
                   </div>
                 )}
               </div>
