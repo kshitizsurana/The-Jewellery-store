@@ -14,8 +14,10 @@ app.use(cors({
     'http://localhost:3000', 
     'http://localhost:3001', 
     'http://localhost:3002',
-    process.env.FRONTEND_URL || 'https://the-jewellery-store.vercel.app'
-  ],
+    process.env.FRONTEND_URL,
+    'https://the-jewellery-store.vercel.app',
+    /^https:\/\/.*\.vercel\.app$/  // Allow any Vercel deployment
+  ].filter(Boolean),
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -28,11 +30,21 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 // Routes
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'JWT Authentication API is running!',
+    message: 'The Jewellery Store API is running!',
+    environment: process.env.NODE_ENV || 'development',
+    timestamp: new Date().toISOString(),
+    corsOrigins: [
+      'http://localhost:3000', 
+      'http://localhost:3001', 
+      'http://localhost:3002',
+      process.env.FRONTEND_URL,
+      'https://the-jewellery-store.vercel.app'
+    ].filter(Boolean),
     endpoints: {
       register: 'POST /auth/register',
       login: 'POST /auth/login',
-      profile: 'GET /auth/profile (requires token)'
+      profile: 'GET /auth/profile (requires token)',
+      jewelry: 'GET /jewelry'
     }
   });
 });
@@ -95,10 +107,12 @@ app.post('/auth/register', async (req, res) => {
 // Login endpoint
 app.post('/auth/login', async (req, res) => {
   try {
+    console.log('Login attempt:', { email: req.body.email, origin: req.headers.origin });
     const { email, password } = req.body;
 
     // Validate input
     if (!email || !password) {
+      console.log('Login validation failed: missing email or password');
       return res.status(400).json({
         success: false,
         message: 'Email and password are required'
@@ -264,6 +278,16 @@ app.post('/auth/verify', (req, res) => {
       error: error.message
     });
   }
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    origin: req.headers.origin,
+    userAgent: req.headers['user-agent']
+  });
 });
 
 // Error handling middleware

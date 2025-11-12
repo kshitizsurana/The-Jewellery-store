@@ -13,6 +13,13 @@ const AuthPage = ({ onLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+  
+  // Debug logging for production
+  console.log('Environment Debug:', {
+    NODE_ENV: process.env.NODE_ENV,
+    API_URL: API_URL,
+    allEnvVars: Object.keys(process.env).filter(key => key.startsWith('REACT_APP_'))
+  });
 
   const handleInputChange = (e) => {
     setFormData({
