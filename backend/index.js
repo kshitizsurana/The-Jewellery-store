@@ -16,7 +16,7 @@ app.use(cors({
     'http://localhost:3002',
     process.env.FRONTEND_URL,
     'https://the-jewellery-store.vercel.app',
-    /^https:\/\/.*\.vercel\.app$/  // Allow any Vercel deployment
+    /^https:\/\/.*\.vercel\.app$/
   ].filter(Boolean),
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -190,6 +190,30 @@ app.get('/api/jewelry', authenticateToken, async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Internal server error'
+    });
+  }
+});
+
+// Public route - Get jewelry collection (no auth required)
+app.get('/jewelry', async (req, res) => {
+  try {
+    const jewelry = await prisma.jewelry.findMany({
+      where: { inStock: true },
+      orderBy: { createdAt: 'desc' }
+    });
+
+    res.json({
+      success: true,
+      jewelry,
+      count: jewelry.length
+    });
+
+  } catch (error) {
+    console.error('Public jewelry fetch error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch jewelry collection',
+      jewelry: []
     });
   }
 });

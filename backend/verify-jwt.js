@@ -1,17 +1,12 @@
 #!/usr/bin/env node
 
-// JWT Token Verification Script
-// This script demonstrates the JWT token verification process
 
 const jwt = require('jsonwebtoken');
 
-// Example token from our authentication system
-// (Replace this with actual token from your app)
 const sampleToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsIm5hbWUiOiJUZXN0IFVzZXIiLCJpYXQiOjE3NjI4NzA2ODEsImV4cCI6MTc2Mjk1NzA4MX0.ZCcbIt8HPfQKvQa7HtZwopMaRWNHEP8JvZQglzEQu7I";
 
 console.log('🚀 JWT Token Verification Demo\n');
 
-// Decode without verification (just to see payload)
 try {
   const decoded = jwt.decode(sampleToken, { complete: true });
   
@@ -37,7 +32,7 @@ try {
 
 console.log('\n🔗 To verify this token:');
 console.log('1. Copy the token above');
-console.log('2. Go to https://jwt.io');
+console.log('2. Go to https:
 console.log('3. Paste the token in the "Encoded" section');
 console.log('4. Verify the payload matches the user data');
 

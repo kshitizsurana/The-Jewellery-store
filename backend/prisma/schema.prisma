@@ -1,12 +1,10 @@
-// This is your Prisma schema file,
+// This is your Prisma schema file for Aiven MySQL
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 generator client {
@@ -23,11 +21,11 @@ model User {
 
 model Jewelry {
   id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  type        String   // ring, necklace, bracelet, earrings, watch, etc.
-  material    String   // gold, silver, platinum, diamond, etc.
-  price       Float
+  name        String   @db.VarChar(255)
+  description String   @db.Text
+  type        String   @db.VarChar(100)  // ring, necklace, bracelet, earrings, watch, etc.
+  material    String   @db.VarChar(100)  // gold, silver, platinum, diamond, etc.
+  price       Decimal  @db.Decimal(10,2)
   inStock     Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
