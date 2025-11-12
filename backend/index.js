@@ -38,13 +38,6 @@ app.get('/', (req, res) => {
     message: 'The Jewellery Store API is running!',
     environment: process.env.NODE_ENV || 'development',
     timestamp: new Date().toISOString(),
-    corsOrigins: [
-      'http://localhost:3000', 
-      'http://localhost:3001', 
-      'http://localhost:3002',
-      process.env.FRONTEND_URL,
-      'https://the-jewellery-store.vercel.app'
-    ].filter(Boolean),
     endpoints: {
       register: 'POST /auth/register',
       login: 'POST /auth/login',
