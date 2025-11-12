@@ -26,8 +26,13 @@
 
 3. **Database Setup**:
    - Railway will auto-provision MySQL database
-   - Prisma will auto-migrate on deployment
-   - Seed script will run automatically
+   - Prisma will auto-migrate on first startup
+   - Seed script will run automatically on startup
+
+4. **Important Notes**:
+   - Database migrations happen at runtime, not during build
+   - Seeding occurs automatically when the server starts
+   - Make sure to set a strong JWT_SECRET in production
 
 ## Vercel Frontend Deployment
 
