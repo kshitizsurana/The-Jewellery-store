@@ -23,9 +23,7 @@ const prisma = new PrismaClient();
 //   allowedHeaders: ['Content-Type', 'Authorization']
 // }));
 
-app.use(cors({
-  origin: '*'
-}));
+app.use(cors());
 
 app.use(express.json());
 
