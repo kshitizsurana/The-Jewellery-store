@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import AuthPage from './components/AuthPage';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Collection from './components/Collection';
+import Cart from './components/Cart';
+import Profile from './components/Profile';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +22,6 @@ function App() {
     
     if (storedToken && storedUser) {
       try {
-        setToken(storedToken);
         setUser(JSON.parse(storedUser));
         setIsAuthenticated(true);
       } catch (error) {
@@ -31,7 +36,6 @@ function App() {
   const handleLogin = (userData, userToken) => {
     console.log('handleLogin called with:', { userData, token: userToken ? '[token present]' : '[no token]' });
     setUser(userData);
-    setToken(userToken);
     setIsAuthenticated(true);
     localStorage.setItem('authToken', userToken);
     localStorage.setItem('authUser', JSON.stringify(userData));
@@ -40,7 +44,6 @@ function App() {
 
   const handleLogout = () => {
     setUser(null);
-    setToken(null);
     setIsAuthenticated(false);
     localStorage.removeItem('authToken');
     localStorage.removeItem('authUser');
@@ -58,13 +61,60 @@ function App() {
   }
 
   return (
-    <div className="App">
-      {isAuthenticated ? (
-        <Dashboard user={user} token={token} onLogout={handleLogout} />
-      ) : (
-        <AuthPage onLogin={handleLogin} />
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar 
+          isAuthenticated={isAuthenticated} 
+          user={user} 
+          onLogout={handleLogout}
+        />
+        
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/login" element={
+            !isAuthenticated ? (
+              <Login onLogin={handleLogin} />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          } />
+          <Route path="/signup" element={
+            !isAuthenticated ? (
+              <Signup onLogin={handleLogin} />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          } />
+          
+          {/* Protected routes */}
+          <Route path="/cart" element={
+            isAuthenticated ? (
+              <Cart />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } />
+          <Route path="/profile" element={
+            isAuthenticated ? (
+              <Profile user={user} onLogout={handleLogout} />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } />
+          
+          {/* Legacy routes */}
+          <Route path="/auth" element={<Navigate to="/login" replace />} />
+          <Route path="/dashboard" element={
+            isAuthenticated ? (
+              <Dashboard user={user} onLogout={handleLogout} />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

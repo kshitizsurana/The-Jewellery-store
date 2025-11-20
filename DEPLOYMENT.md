@@ -18,21 +18,23 @@
 
 2. **Environment Variables** (Set in Railway dashboard):
    ```
-   DATABASE_URL=your_mysql_database_url
+   DATABASE_URL=mysql://avnadmin:your_password@your_host:your_port/defaultdb?ssl-mode=REQUIRED
    JWT_SECRET=your_jwt_secret_key_here
    FRONTEND_URL=https://the-jewellery-store.vercel.app
    NODE_ENV=production
    ```
 
-3. **Database Setup**:
-   - Railway will auto-provision MySQL database
+3. **Database Setup** (Using Aiven):
+   - Use your Aiven MySQL database URL
+   - Ensure SSL connection is enabled
    - Prisma will auto-migrate on first startup
-   - Seed script will run automatically on startup
+   - Seed script will populate jewelry data automatically
 
 4. **Important Notes**:
    - Database migrations happen at runtime, not during build
    - Seeding occurs automatically when the server starts
    - Make sure to set a strong JWT_SECRET in production
+   - Aiven requires SSL connections
 
 ## Vercel Frontend Deployment
 

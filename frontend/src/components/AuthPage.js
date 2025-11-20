@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './AuthPage.css';
 
-const AuthPage = ({ onLogin }) => {
-  const [isLogin, setIsLogin] = useState(true);
+const AuthPage = ({ onLogin, initialMode = 'login', onClose }) => {
+  const [isLogin, setIsLogin] = useState(initialMode === 'signup' ? false : true);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -77,7 +77,7 @@ const AuthPage = ({ onLogin }) => {
         setMessage(response.data.message || 'Something went wrong');
       }
     } catch (error) {
-      console.error('Auth error:', error);
+      // console.error('Auth error:', error);
       console.error('Error details:', {
         message: error.message,
         response: error.response?.data,

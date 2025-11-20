@@ -8,20 +8,7 @@ require('dotenv').config();
 const app = express();
 const prisma = new PrismaClient();
 
-// Middleware
-// app.use(cors({
-//   origin: [
-//     'http://localhost:3000', 
-//     'http://localhost:3001', 
-//     'http://localhost:3002',
-//     process.env.FRONTEND_URL,
-//     'https://the-jewellery-store.vercel.app',
-//     /^https:\/\/.*\.vercel\.app$/
-//   ].filter(Boolean),
-//   credentials: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
+
 
 app.use(cors());
 
@@ -82,13 +69,26 @@ app.post('/auth/register', async (req, res) => {
       }
     });
 
+    // Generate JWT token for automatic login
+    const token = jwt.sign(
+      { 
+        userId: user.id, 
+        email: user.email,
+        name: user.name,
+        iat: Math.floor(Date.now() / 1000),
+        exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60) // 24 hours
+      },
+      JWT_SECRET
+    );
+
     // Remove password from response
     const { password: _, ...userWithoutPassword } = user;
 
     res.status(201).json({
       success: true,
       message: 'User registered successfully',
-      user: userWithoutPassword
+      user: userWithoutPassword,
+      token
     });
 
   } catch (error) {
@@ -323,6 +323,6 @@ const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`📊 Database connection established`);
+  console.log(`Database connection established`);
   console.log(`🔐 JWT Authentication API ready`);
 });

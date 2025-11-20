@@ -1,0 +1,606 @@
+/* Import Beautiful Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* Home Page Styles - Black & White Theme */
+.home {
+  min-height: 100vh;
+  background: #0a0a0a;
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+}
+
+/* Video Background - Jewelry Themed */
+.hero-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  filter: brightness(0.4) contrast(1.2) grayscale(0.3);
+  object-fit: cover;
+}
+
+/* Enhanced Jewelry-Themed Animation Background */
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Base jewelry showcase background */
+    linear-gradient(
+      135deg,
+      #000000 0%,
+      #0a0a0a 20%,
+      #1a1a1a 40%,
+      #0f0f0f 60%,
+      #050505 80%,
+      #000000 100%
+    );
+  background-size: 400% 400%;
+  animation: jewelryShowcase 20s ease infinite;
+  overflow: hidden;
+}
+
+.animated-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Diamond light reflections */
+    radial-gradient(ellipse at 15% 25%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 75% 30%, rgba(240, 240, 240, 0.12) 0%, transparent 35%),
+    radial-gradient(ellipse at 45% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 80%, rgba(230, 230, 230, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 25% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 30%),
+    /* Gold accent reflections */
+    radial-gradient(circle at 60% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 25%),
+    radial-gradient(circle at 30% 60%, rgba(255, 223, 0, 0.06) 0%, transparent 30%);
+  animation: jewelryReflections 25s ease-in-out infinite;
+}
+
+.animated-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="jewelry-sparkles" width="40" height="40" patternUnits="userSpaceOnUse"><!-- Diamond sparkles --><g opacity="0.6"><path d="M8 8 L10 6 L12 8 L10 10 Z" fill="white" opacity="0"><animate attributeName="opacity" values="0;0.8;0" dur="3s" repeatCount="indefinite" begin="0s"/><animateTransform attributeName="transform" type="rotate" values="0 10 8; 45 10 8; 0 10 8" dur="3s" repeatCount="indefinite" begin="0s"/></path><path d="M28 15 L30 13 L32 15 L30 17 Z" fill="white" opacity="0"><animate attributeName="opacity" values="0;0.6;0" dur="4s" repeatCount="indefinite" begin="1s"/><animateTransform attributeName="transform" type="rotate" values="0 30 15; -45 30 15; 0 30 15" dur="4s" repeatCount="indefinite" begin="1s"/></path><path d="M15 25 L17 23 L19 25 L17 27 Z" fill="white" opacity="0"><animate attributeName="opacity" values="0;0.7;0" dur="2.5s" repeatCount="indefinite" begin="2s"/><animateTransform attributeName="transform" type="rotate" values="0 17 25; 60 17 25; 0 17 25" dur="2.5s" repeatCount="indefinite" begin="2s"/></path><!-- Gold glimmers --><circle cx="35" cy="35" r="1" fill="rgba(255,215,0,0.7)" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="5s" repeatCount="indefinite" begin="1.5s"/><animate attributeName="r" values="0.5;2;0.5" dur="5s" repeatCount="indefinite" begin="1.5s"/></circle><circle cx="5" cy="30" r="0.8" fill="rgba(255,223,0,0.5)" opacity="0"><animate attributeName="opacity" values="0;0.8;0" dur="6s" repeatCount="indefinite" begin="3s"/><animate attributeName="r" values="0.3;1.5;0.3" dur="6s" repeatCount="indefinite" begin="3s"/></circle></g></pattern></defs><rect width="200" height="200" fill="url(%23jewelry-sparkles)"/></svg>');
+  opacity: 0.4;
+  animation: sparkleFlow 30s linear infinite;
+}
+
+@keyframes jewelryShowcase {
+  0% { 
+    background-position: 0% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+  25% { 
+    background-position: 50% 25%;
+    transform: scale(1.02) rotate(0.5deg);
+  }
+  50% { 
+    background-position: 100% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+  75% { 
+    background-position: 50% 75%;
+    transform: scale(1.01) rotate(-0.5deg);
+  }
+  100% { 
+    background-position: 0% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes jewelryReflections {
+  0%, 100% { 
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+    opacity: 0.6;
+  }
+  20% { 
+    transform: translateX(15px) translateY(-20px) scale(1.1) rotate(2deg);
+    opacity: 0.9;
+  }
+  40% { 
+    transform: translateX(-10px) translateY(-35px) scale(0.95) rotate(-1deg);
+    opacity: 0.7;
+  }
+  60% { 
+    transform: translateX(-20px) translateY(-15px) scale(1.05) rotate(1.5deg);
+    opacity: 0.8;
+  }
+  80% { 
+    transform: translateX(5px) translateY(-25px) scale(0.98) rotate(-0.5deg);
+    opacity: 0.75;
+  }
+}
+
+@keyframes sparkleFlow {
+  0% { 
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translateY(-50px) translateX(10px) rotate(5deg);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateY(-100px) translateX(-5px) rotate(-3deg);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-150px) translateX(8px) rotate(2deg);
+    opacity: 0.3;
+  }
+  100% { 
+    transform: translateY(-200px) translateX(0) rotate(0deg);
+    opacity: 0.2;
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(26, 26, 26, 0.8) 50%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 2;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.3;
+  z-index: 3;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  position: relative;
+  z-index: 4;
+}
+
+.hero-content {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.7);
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  letter-spacing: 1px;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #ffffff 0%, #cccccc 100%);
+  color: #000000;
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.6);
+  background: linear-gradient(45deg, #cccccc 0%, #999999 100%);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
+}
+
+/* Hero Image */
+.hero-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+/* Additional jewelry elements floating animation */
+.floating-jewelry {
+  position: relative;
+  width: 350px;
+  height: 350px;
+}
+
+.jewelry-item {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  background: rgba(255, 215, 0, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  backdrop-filter: blur(10px);
+  animation: jewelryFloat 8s ease-in-out infinite;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.jewelry-item:hover {
+  transform: scale(1.1) translateY(-5px);
+  background: rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.6);
+  text-shadow: 0 0 30px rgba(255, 215, 0, 1);
+}
+
+.jewelry-ring {
+  top: 15%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.jewelry-diamond {
+  top: 25%;
+  right: 15%;
+  animation-delay: 1.5s;
+}
+
+.jewelry-crown {
+  top: 50%;
+  left: 5%;
+  animation-delay: 3s;
+}
+
+.jewelry-necklace {
+  bottom: 25%;
+  left: 25%;
+  animation-delay: 4.5s;
+}
+
+.jewelry-earring {
+  bottom: 15%;
+  right: 25%;
+  animation-delay: 6s;
+  font-size: 2rem;
+}
+
+.jewelry-bracelet {
+  top: 5%;
+  right: 45%;
+  animation-delay: 7.5s;
+}
+
+.jewelry-showcase {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
+
+.showcase-item {
+  position: absolute;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 215, 0, 0.9);
+  background: rgba(255, 215, 0, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  backdrop-filter: blur(5px);
+  animation: sparkleRotate 4s linear infinite;
+}
+
+.showcase-item:nth-child(1) {
+  top: 20%;
+  left: 40%;
+  animation-delay: 0s;
+}
+
+.showcase-item:nth-child(2) {
+  top: 60%;
+  right: 20%;
+  animation-delay: 1.3s;
+}
+
+.showcase-item:nth-child(3) {
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 2.6s;
+}
+
+@keyframes jewelryFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+  }
+  25% {
+    transform: translateY(-15px) rotate(8deg) scale(1.05);
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+  }
+  50% { 
+    transform: translateY(-25px) rotate(15deg) scale(1.1);
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+  }
+  75% {
+    transform: translateY(-15px) rotate(8deg) scale(1.05);
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+  }
+}
+
+@keyframes sparkleRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 0.6;
+  }
+}
+
+/* Features Section */
+.features-section {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: #ffffff;
+  background: linear-gradient(45deg, #ffffff, #cccccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  padding: 2.5rem 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.feature-card p {
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  color: white;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cta-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.btn-large {
+  padding: 1.2rem 3rem;
+  font-size: 1.1rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .hero-image {
+    height: 200px;
+  }
+
+  .floating-jewelry {
+    width: 200px;
+    height: 200px;
+  }
+
+  .jewelry-item {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    padding: 2rem 1rem;
+  }
+
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+
+  .cta-content p {
+    font-size: 1rem;
+  }
+
+  .hero-video {
+    /* On mobile, hide video to save bandwidth and improve performance */
+    display: none;
+  }
+  
+  .hero-overlay {
+    /* Show stronger overlay on mobile without video */
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 26, 0.95) 50%, rgba(0, 0, 0, 0.9) 100%);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .features-section {
+    padding: 4rem 0;
+  }
+
+  .cta-section {
+    padding: 4rem 0;
+  }
+}
+
+
