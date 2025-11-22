@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './Auth.css';
+import { FiMail, FiLock, FiUser, FiArrowRight } from 'react-icons/fi';
+import './AuthPage.css';
 
 const Signup = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -63,74 +64,86 @@ const Signup = ({ onLogin }) => {
   };
 
   return (
-    <div className="auth-page-container">
-      <div className="auth-header">
-        <h1 className="auth-title">Create Account</h1>
-        <p className="auth-subtitle">Join our luxury jewelry collection</p>
-      </div>
-      
-      <div className="auth-content">
-        <div className="auth-form-container">
+    <div className="auth-page">
+      <div className="auth-container">
+        <div className="auth-card">
+          <div className="auth-header">
+            <h1 className="auth-title">Create Account</h1>
+            <p className="auth-subtitle">Join our luxury jewelry collection</p>
+          </div>
+          
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">
-              <label htmlFor="name">Full Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-                placeholder="Enter your full name"
-                className="form-input"
-              />
+              <label htmlFor="name" className="form-label">Full Name</label>
+              <div className="input-with-icon">
+                <FiUser className="input-icon" />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter your full name"
+                  className="form-input"
+                />
+              </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                placeholder="Enter your email"
-                className="form-input"
-              />
+              <label htmlFor="email" className="form-label">Email Address</label>
+              <div className="input-with-icon">
+                <FiMail className="input-icon" />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter your email"
+                  className="form-input"
+                />
+              </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-                placeholder="Create a password"
-                className="form-input"
-                minLength="6"
-              />
+              <label htmlFor="password" className="form-label">Password</label>
+              <div className="input-with-icon">
+                <FiLock className="input-icon" />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Create a password"
+                  className="form-input"
+                  minLength="6"
+                />
+              </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                required
-                placeholder="Confirm your password"
-                className="form-input"
-              />
+              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+              <div className="input-with-icon">
+                <FiLock className="input-icon" />
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Confirm your password"
+                  className="form-input"
+                />
+              </div>
             </div>
 
             {message && (
-              <div className={`message ${message.includes('successful') ? 'success' : 'error'}`}>
+              <div className={`message-box ${message.includes('successful') || message.includes('Welcome') ? 'success-message' : 'error-message'}`}>
                 {message}
               </div>
             )}
@@ -140,12 +153,46 @@ const Signup = ({ onLogin }) => {
               className={`auth-submit-btn ${isLoading ? 'loading' : ''}`}
               disabled={isLoading}
             >
-              {isLoading ? 'Creating Account...' : 'Create Account'}
+              {isLoading ? (
+                <>
+                  <div className="spinner-small"></div>
+                  Creating Account...
+                </>
+              ) : (
+                <>
+                  Create Account
+                  <FiArrowRight size={18} />
+                </>
+              )}
             </button>
-          </form>
 
-          <div className="auth-switch">
-            <p>Already have an account? <Link to="/login" className="auth-switch-link">Sign in</Link></p>
+            <div className="auth-divider">
+              <span>or</span>
+            </div>
+
+            <div className="auth-footer">
+              <p className="auth-footer-text">
+                Already have an account?{' '}
+                <Link to="/login" className="auth-link">
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div className="auth-benefits">
+          <div className="benefit-item">
+            <span className="benefit-icon">✓</span>
+            <span>Exclusive member benefits</span>
+          </div>
+          <div className="benefit-item">
+            <span className="benefit-icon">✓</span>
+            <span>Early access to new collections</span>
+          </div>
+          <div className="benefit-item">
+            <span className="benefit-icon">✓</span>
+            <span>Personalized recommendations</span>
           </div>
         </div>
       </div>

@@ -10,6 +10,11 @@ A full-stack jewelry store application built with React, Node.js, and MySQL.
 - **Product Management**: Browse jewelry with detailed information
 - **User Management**: Profile management and authentication states
 - **Modern Tech Stack**: React, Node.js, Express, Prisma, MySQL
+- **Razorpay Payment Integration**: Secure payment gateway with mock dev mode
+- **Advanced Search**: Centered search bar with autocomplete functionality
+- **Shopping Cart**: Add items, manage quantities, checkout seamlessly
+- **Wishlist**: Save favorite items for later
+- **Premium Navbar**: Logo left, search centered, utilities right
 
 ## 🚀 Tech Stack
 

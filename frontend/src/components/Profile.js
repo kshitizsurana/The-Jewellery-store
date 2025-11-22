@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FiUser, FiPackage, FiHeart, FiSettings, FiEdit2, FiSave, FiX, FiTruck, FiCheck, FiClock, FiShoppingBag, FiAward, FiDollarSign, FiTrendingUp } from 'react-icons/fi';
 import './Profile.css';
 
 const Profile = ({ user, onLogout }) => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -10,6 +13,7 @@ const Profile = ({ user, onLogout }) => {
     phone: user?.phone || '+1 (555) 123-4567',
     address: user?.address || '123 Main St, New York, NY 10001',
     birthdate: user?.birthdate || '1990-01-01',
+    memberSince: user?.createdAt || '2024-01-01',
     preferences: {
       newsletter: true,
       promotions: true,
@@ -122,11 +126,57 @@ const Profile = ({ user, onLogout }) => {
             <div>
               <h1 className="profile-name">Welcome, {profileData.name}</h1>
               <p className="profile-email">{profileData.email}</p>
+              <p className="member-since">
+                <FiAward className="icon" />
+                Member since {new Date(profileData.memberSince).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+              </p>
             </div>
           </div>
           <button className="logout-btn" onClick={onLogout}>
             Logout
           </button>
+        </div>
+
+        {/* Quick Stats */}
+        <div className="profile-stats">
+          <div className="stat-card">
+            <div className="stat-icon orders">
+              <FiPackage />
+            </div>
+            <div className="stat-info">
+              <div className="stat-value">{orders.length}</div>
+              <div className="stat-label">Total Orders</div>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon favorites">
+              <FiHeart />
+            </div>
+            <div className="stat-info">
+              <div className="stat-value">{favorites.length}</div>
+              <div className="stat-label">Wishlist Items</div>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon spending">
+              <FiDollarSign />
+            </div>
+            <div className="stat-info">
+              <div className="stat-value">
+                ${orders.reduce((sum, order) => sum + order.total, 0).toLocaleString()}
+              </div>
+              <div className="stat-label">Total Spent</div>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon rewards">
+              <FiTrendingUp />
+            </div>
+            <div className="stat-info">
+              <div className="stat-value">450</div>
+              <div className="stat-label">Reward Points</div>
+            </div>
+          </div>
         </div>
 
         <div className="profile-content">
@@ -296,7 +346,15 @@ const Profile = ({ user, onLogout }) => {
           {activeTab === 'favorites' && (
             <div className="tab-content">
               <div className="favorites-grid">
-                <h2>Your Favorites</h2>
+                <div className="favorites-header">
+                  <h2>Your Favorites</h2>
+                  <button 
+                    className="view-all-btn"
+                    onClick={() => navigate('/wishlist')}
+                  >
+                    View Full Wishlist
+                  </button>
+                </div>
                 <div className="favorites-list">
                   {favorites.map(item => (
                     <div key={item.id} className="favorite-card">

@@ -8,14 +8,17 @@ require('dotenv').config();
 const app = express();
 const prisma = new PrismaClient();
 
-
+// Import payment routes
+const paymentRoutes = require('./routes/payment.routes');
 
 app.use(cors());
-
 app.use(express.json());
 
 // JWT secret
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+
+// Mount payment routes
+app.use('/api/payment', paymentRoutes);
 
 // Routes
 app.get('/', (req, res) => {
@@ -27,7 +30,10 @@ app.get('/', (req, res) => {
       register: 'POST /auth/register',
       login: 'POST /auth/login',
       profile: 'GET /auth/profile (requires token)',
-      jewelry: 'GET /jewelry'
+      jewelry: 'GET /jewelry',
+      payment: 'POST /api/payment/create-order',
+      verify: 'POST /api/payment/verify',
+      paymentStatus: 'GET /api/payment/status/:paymentId'
     }
   });
 });

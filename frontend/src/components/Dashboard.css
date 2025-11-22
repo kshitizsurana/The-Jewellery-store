@@ -1,17 +1,14 @@
 /* Dashboard Container */
 .dashboard {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  background: #fafaf9;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .dashboard-background {
   min-height: 100vh;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  background: #fafaf9;
 }
 
 .dashboard-container {
@@ -26,14 +23,11 @@
 
 /* Header Section */
 .dashboard-header {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
+  background: white;
+  border: 1px solid #e7e5e4;
   border-radius: 24px;
   padding: 2rem 3rem;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.8),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .header-content {
@@ -52,25 +46,21 @@
 .welcome-section h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #292524;
   margin: 0 0 1rem 0;
-  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   line-height: 1.2;
 }
 
 .user-subtitle {
   font-size: 1.25rem;
-  color: #cccccc;
+  color: #78716c;
   margin: 0 0 0.75rem 0;
   font-weight: 500;
 }
 
 .user-email {
   font-size: 1rem;
-  color: #888888;
+  color: #a8a29e;
   margin: 0;
   font-weight: 400;
 }
@@ -84,20 +74,20 @@
 .user-avatar {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-  color: #000000;
+  background: linear-gradient(135deg, #c9a960, #b39450);
+  color: white;
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 700;
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(201, 169, 96, 0.3);
 }
 
 .logout-button {
-  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-  color: #000000;
+  background: linear-gradient(135deg, #c9a960, #b39450);
+  color: white;
   border: none;
   padding: 1rem 1.5rem;
   border-radius: 16px;
@@ -114,7 +104,7 @@
 
 .logout-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 20px rgba(201, 169, 96, 0.4);
 }
 
 .button-icon {
@@ -136,9 +126,9 @@
 }
 
 .tab-btn {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  color: #cccccc;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  color: #78716c;
+  border: 1px solid #e7e5e4;
   padding: 1rem 1.5rem;
   border-radius: 12px;
   cursor: pointer;
@@ -153,18 +143,18 @@
 }
 
 .tab-btn:hover {
-  background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
-  color: #ffffff;
+  background: #fafaf9;
+  color: #292524;
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: #c9a960;
 }
 
 .tab-btn.active {
-  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-  color: #000000;
+  background: linear-gradient(135deg, #c9a960, #b39450);
+  color: white;
   border-color: transparent;
   font-weight: 600;
-  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(201, 169, 96, 0.3);
 }
 
 .tab-icon {
@@ -180,8 +170,8 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  border: 1px solid #e7e5e4;
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
@@ -192,19 +182,20 @@
 
 .stat-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-color: #c9a960;
 }
 
 .stat-icon {
   font-size: 2rem;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+  background: linear-gradient(135deg, #c9a960, #b39450);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 
 .stat-info {
@@ -214,12 +205,12 @@
 .stat-value {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #292524;
   margin-bottom: 0.25rem;
 }
 
 .stat-label {
-  color: #cccccc;
+  color: #78716c;
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -234,34 +225,29 @@
 
 /* Card Styles */
 .card {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
+  background: white;
+  border: 1px solid #e7e5e4;
   border-radius: 24px;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.8),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 
-    0 25px 70px rgba(255, 255, 255, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 .card-header {
   padding: 2rem 2.5rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-bottom: 1px solid #e7e5e4;
+  background: #fafaf9;
 }
 
 .card-header h2 {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #292524;
   margin: 0;
   display: flex;
   align-items: center;
@@ -535,7 +521,7 @@
 }
 
 .cart-header h2 {
-  color: #ffffff;
+  color: #292524;
   font-size: 1.75rem;
   font-weight: 700;
   margin: 0;
@@ -571,10 +557,10 @@
 }
 
 .cart-item {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  background: white;
   border-radius: 15px;
   padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #e7e5e4;
   display: grid;
   grid-template-columns: 60px 1fr auto auto auto;
   gap: 1.5rem;
@@ -586,7 +572,7 @@
 .cart-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: #d6d3d1;
 }
 
 .cart-item .item-image {
@@ -602,7 +588,7 @@
 .cart-item .item-text {
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #292524;
   text-align: center;
 }
 
@@ -615,18 +601,18 @@
 .cart-item .item-name {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #292524;
   margin: 0;
 }
 
 .cart-item .item-category {
-  color: #cccccc;
+  color: #78716c;
   font-size: 0.9rem;
   margin: 0;
 }
 
 .cart-item .item-spec {
-  color: #888888;
+  color: #a8a29e;
   font-size: 0.8rem;
   margin: 0;
 }
@@ -639,7 +625,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: #cccccc;
+  color: #78716c;
   font-size: 0.9rem;
 }
 
@@ -663,7 +649,7 @@
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #292524;
   transition: all 0.3s ease;
 }
 
@@ -675,7 +661,7 @@
   width: 40px;
   text-align: center;
   font-weight: 600;
-  color: #ffffff;
+  color: #292524;
   background: transparent;
   height: 30px;
   display: flex;
@@ -694,14 +680,14 @@
 }
 
 .price-per-item {
-  color: #cccccc;
+  color: #78716c;
   font-size: 0.8rem;
 }
 
 .total-price {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #292524;
 }
 
 .remove-item-btn {
@@ -729,8 +715,8 @@
 
 /* Cart Summary */
 .cart-summary {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  border: 1px solid #e7e5e4;
   border-radius: 15px;
   padding: 1.5rem;
   height: fit-content;
@@ -743,7 +729,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.75rem;
-  color: #cccccc;
+  color: #78716c;
 }
 
 .summary-row .free {
@@ -754,7 +740,7 @@
 .summary-row.total {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #292524;
   margin-top: 1rem;
 }
 
@@ -788,7 +774,7 @@
 .empty-cart {
   text-align: center;
   padding: 4rem 2rem;
-  color: #cccccc;
+  color: #78716c;
 }
 
 .empty-cart-icon {
@@ -800,7 +786,7 @@
 .empty-cart h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: #ffffff;
+  color: #292524;
 }
 
 .shop-now-btn {

@@ -2,23 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './components/Home';
 import Collection from './components/Collection';
 import Cart from './components/Cart';
 import Profile from './components/Profile';
+import Wishlist from './components/Wishlist';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
+import PaymentSuccess from './components/PaymentSuccess';
+import PaymentFailure from './components/PaymentFailure';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   useEffect(() => {
     // Check if user is already logged in
     const storedToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('authUser');
+    const storedTheme = localStorage.getItem('theme');
     
     if (storedToken && storedUser) {
       try {
@@ -30,6 +37,13 @@ function App() {
         localStorage.removeItem('authUser');
       }
     }
+    
+    // Load theme preference
+    if (storedTheme === 'dark') {
+      setIsDarkTheme(true);
+      document.body.classList.add('dark-theme');
+    }
+    
     setIsLoading(false);
   }, []);
 
@@ -47,6 +61,19 @@ function App() {
     setIsAuthenticated(false);
     localStorage.removeItem('authToken');
     localStorage.removeItem('authUser');
+  };
+
+  const toggleTheme = () => {
+    const newTheme = !isDarkTheme;
+    setIsDarkTheme(newTheme);
+    
+    if (newTheme) {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    }
   };
 
   if (isLoading) {
@@ -67,6 +94,8 @@ function App() {
           isAuthenticated={isAuthenticated} 
           user={user} 
           onLogout={handleLogout}
+          isDarkTheme={isDarkTheme}
+          onToggleTheme={toggleTheme}
         />
         
         <Routes>
@@ -95,6 +124,13 @@ function App() {
               <Navigate to="/login" replace />
             )
           } />
+          <Route path="/wishlist" element={
+            isAuthenticated ? (
+              <Wishlist user={user} />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } />
           <Route path="/profile" element={
             isAuthenticated ? (
               <Profile user={user} onLogout={handleLogout} />
@@ -102,6 +138,10 @@ function App() {
               <Navigate to="/login" replace />
             )
           } />
+          
+          {/* Payment Routes */}
+          <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/payment-failure" element={<PaymentFailure />} />
           
           {/* Legacy routes */}
           <Route path="/auth" element={<Navigate to="/login" replace />} />
@@ -113,6 +153,9 @@ function App() {
             )
           } />
         </Routes>
+        
+        <Footer />
+        <ScrollToTop />
       </div>
     </Router>
   );

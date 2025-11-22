@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { FiSearch, FiHeart, FiUser, FiShoppingCart, FiMenu } from 'react-icons/fi';
+import ThemeToggle from './ThemeToggle';
 import './Navbar.css';
 
-const Navbar = ({ isAuthenticated, user, onLogout }) => {
+const Navbar = ({ isAuthenticated, user, onLogout, isDarkTheme, onToggleTheme }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,14 +18,6 @@ const Navbar = ({ isAuthenticated, user, onLogout }) => {
     }
   };
 
-  const handleAuthAction = () => {
-    if (isAuthenticated) {
-      onLogout();
-    } else {
-      navigate('/login');
-    }
-  };
-
   const handleLogin = () => {
     navigate('/login');
   };
@@ -31,116 +26,139 @@ const Navbar = ({ isAuthenticated, user, onLogout }) => {
     navigate('/signup');
   };
 
+  const handleLogout = () => {
+    onLogout();
+  };
+
   const isActive = (path) => {
     return location.pathname === path;
   };
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* Logo - Left Corner */}
-        <Link to="/" className="navbar-logo">
-          <span className="logo-text">Jewellery Store</span>
-        </Link>
+  const handleCollectionClick = () => {
+    navigate('/collection');
+  };
 
-        {/* Navigation Links - Middle */}
-        <div className="navbar-menu">
-          <Link 
-            to="/" 
-            className={`navbar-item ${isActive('/') ? 'active' : ''}`}
-          >
-            Home
+  return (
+    <nav className="navbar-tanishq">
+      <div className="navbar-content">
+        {/* Logo - Left Corner */}
+        <div className="navbar-left">
+          <Link to="/" className="logo-tanishq">
+            <span className="logo-text-tanishq">Jewellery Store</span>
           </Link>
-          <Link 
-            to="/collection" 
-            className={`navbar-item ${isActive('/collection') ? 'active' : ''}`}
+          
+          {/* Collection Button - Next to Logo */}
+          <button 
+            className="collection-btn"
+            onClick={handleCollectionClick}
+            aria-label="View Collection"
           >
             Collection
-          </Link>
-          <Link 
-            to="/cart" 
-            className={`navbar-item ${isActive('/cart') ? 'active' : ''}`}
-          >
-            Cart
-          </Link>
-          {isAuthenticated && (
-            <Link 
-              to="/dashboard" 
-              className={`navbar-item ${isActive('/dashboard') ? 'active' : ''}`}
-            >
-              Dashboard
-            </Link>
-          )}
-          <Link 
-            to="/profile" 
-            className={`navbar-item ${isActive('/profile') ? 'active' : ''}`}
-          >
-            Profile
-          </Link>
+          </button>
         </div>
 
-        {/* Right Side Actions - Search & Auth */}
-        <div className="navbar-actions">
-          {/* Search Bar */}
-          <div className="search-container">
-            <form 
-              className="search-form"
-              onSubmit={handleSearch}
+        {/* Search Bar - Center */}
+        <div className="navbar-center">
+          <form className="search-pill" onSubmit={handleSearch}>
+
+            <input
+              type="text"
+              placeholder="Search for Gold Jewellery, Diamond Jewellery and more..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input-tanishq"
+              aria-label="Search jewelry"
+            />
+          </form>
+        </div>
+
+        {/* Right Side - Utility Icons & Auth */}
+        <div className="navbar-right">
+          {/* Utility Icons */}
+          <div className="utility-icons">
+            <button 
+              className="icon-btn" 
+              aria-label="Wishlist"
+              onClick={() => navigate(isAuthenticated ? '/wishlist' : '/login')}
             >
-              <div className="search-input-wrapper">
-                <input
-                  type="text"
-                  placeholder="Search jewelry..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="search-input"
-                />
-                <button 
-                  type="submit"
-                  className="search-submit"
-                  aria-label="Search"
-                >
-                  Search
-                </button>
-              </div>
-            </form>
+              <FiHeart size={20} />
+            </button>
+            
+            <button 
+              className="icon-btn" 
+              aria-label="Account"
+              onClick={() => navigate(isAuthenticated ? '/profile' : '/login')}
+            >
+              <FiUser size={20} />
+            </button>
+            
+            <button 
+              className="icon-btn cart-btn" 
+              aria-label="Cart"
+              onClick={() => navigate(isAuthenticated ? '/cart' : '/login')}
+            >
+              <FiShoppingCart size={20} />
+              <span className="cart-badge">0</span>
+            </button>
           </div>
 
-          {/* User Info */}
-          {isAuthenticated && user && (
-            <div className="user-info">
-              <span className="user-greeting">
-                Hi, {user.name || user.email?.split('@')[0] || 'User'}!
-              </span>
-            </div>
-          )}
+          {/* Theme Toggle */}
+          <ThemeToggle isDarkTheme={isDarkTheme} onToggle={onToggleTheme} />
 
           {/* Auth Buttons */}
-          {isAuthenticated ? (
-            <button 
-              className="auth-button logout-button"
-              onClick={handleAuthAction}
-            >
-              Logout
-            </button>
-          ) : (
-            <div className="auth-buttons">
+          <div className="auth-section-tanishq">
+            {isAuthenticated ? (
               <button 
-                className="auth-button login-button"
-                onClick={handleLogin}
+                className="btn-auth-tanishq btn-logout"
+                onClick={handleLogout}
               >
-                Login
+                Logout
               </button>
-              <button 
-                className="auth-button signup-button"
-                onClick={handleSignup}
-              >
-                Sign Up
-              </button>
-            </div>
-          )}
+            ) : (
+              <div className="auth-buttons-group">
+                <button 
+                  className="btn-auth-tanishq btn-login"
+                  onClick={handleLogin}
+                >
+                  Login
+                </button>
+                <button 
+                  className="btn-auth-tanishq btn-signup"
+                  onClick={handleSignup}
+                >
+                  Sign Up
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="mobile-menu-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Menu"
+          >
+            <FiMenu size={24} />
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-overlay">
+          <div className="mobile-menu-content">
+            <button
+              className="mobile-collection-btn"
+              onClick={() => {
+                handleCollectionClick();
+                setMobileMenuOpen(false);
+              }}
+            >
+              Collection
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
