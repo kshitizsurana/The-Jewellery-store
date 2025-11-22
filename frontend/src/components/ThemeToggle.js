@@ -17,5 +17,4 @@ const ThemeToggle = ({ isDarkTheme, onToggle }) => {
     </button>
   );
 };
-
 export default ThemeToggle;
